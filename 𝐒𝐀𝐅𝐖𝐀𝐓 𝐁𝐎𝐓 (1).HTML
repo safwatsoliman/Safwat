@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safwat Signal Quotex</title>
+    <style>
+        body {
+            background-color:purple ;
+            color: gold;
+            font-family: monospace;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1, h3 {
+            color: #;
+        }
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #000000;
+        }
+        select, input {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fffffff;
+            border: Cayn;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            color: white;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #000000;
+        }
+        .button-container {
+            display: flex;
+            justify-content: start;
+        }
+        .error-message {
+            color: red;
+        }
+        .animation-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            text-align: center;
+            margin: 40px auto;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #ffd700;
+            font-size: 16px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #218838;
+        }
+        .login-container a {
+            color: cyan;
+            text-decoration: none;
+        }
+        .login-container a:hover {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div class="login-container">
+        <h2>✧ 𝚂𝙰𝙵𝚆𝙰𝚃 𝚀𝚄𝙾𝚃𝙴𝚇 ✧</h2>
+        <p id="error-message" class="error-message"></p>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" placeholder="password" />
+        <button id="login-button">Login</button>
+     
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>𝐓𝐇𝐄 𝐌𝐎𝐒𝐓 𝐏𝐎𝐖𝐄𝐑𝐅𝐔𝐋 𝐁𝐎𝐓 𝐅𝐎𝐑 𝐓𝐇𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐏𝐋𝐀𝐓𝐅𝐎𝐑𝐌 𝐒𝐀𝐅𝐖𝐀𝐓</h1>
+        <p>SAFWAT THE BEST </p>
+        <p id="timezone-info">Your country time: Asia/Dhaka | Date: <span id="current-date"></span> | Time: <span id="current-time"></span></p>
+
+        
+           <h3>✰ Existing pairs ✰</h3>
+        <select id="asset-select">
+            <option value="">Select Quotex Pairs</option>
+        </select>
+
+        <h3>✰ Number of Signals to Generate ✰</h3>
+        <input type="number" id="signal-count" value="1" min="1" />
+
+        <h3>✰ Filter Signals ✰</h3>
+        <select id="filter-select">
+            <option value="ALL">All</option>
+            <option value="CALL">CALL</option>
+            <option value="PUT">PUT</option>
+        </select>
+
+        <h3>✰Backtest Filter✰</h3>
+        <label>
+            <input type="checkbox" id="backtest-filter" />
+            Backtest trades filtering (98% accuracy)
+        </label>
+
+        <div class="button-container">
+            <button id="generate-signals">Signal generation</button>
+            <button id="reset-signals">Reset Signals</button>
+        </div>
+
+        <p id="error-message" class="error-message"></p>
+        
+        <h3>✰ Safwat deals ✰</h3>
+        <ul id="signal-list"></ul>
+        
+        <div id="animation-message" class="animation-message">
+            <h3>New Signals Quotex</h3>
+        </div>
+    </div>
+
+    <script>
+        // Login functionality
+        const loginButton = document.getElementById('login-button');
+        const errorMessage = document.getElementById('error-message');
+
+        loginButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!username || !password) {
+                errorMessage.textContent = 'Please fill in all fields.';
+                return;
+            }
+
+            errorMessage.textContent = '';
+            // Simulate authentication process
+            if (username === 'QUOTEX BOT' && password === '012312') {
+                alert('♛SAFWAT THE BEST♛');
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.container').style.display = 'block';
+            } else {
+                errorMessage.textContent = 'Invalid username or password.';
+            }
+        });
+
+        // Hide main content initially
+        document.querySelector('.container').style.display = 'none';
+
+        // Main application functionality
+        const availableAssets = [
+            "AUD/CAD➢", "AUD/CHF➢", "AUD/JPY➢", "AUD/NZD➢", "AUD/USD➢",
+            "CAD/CHF➢", "CHF/JPY➢", "EUR/AUD➢", "EUR/CAD➢", "EUR/CHF➢",
+            "EUR/GBP➢", "EUR/USD➢", "GBP/AUD➢", "GBP/CAD➢", "GBP/CHF➢",
+            "GBP/JPY➢", "GBP/NZD➢", "GBP/USD➢", "NZD/CAD➢", "NZD/CHF➢",
+            "NZD/JPY➢", "USD/BDT☞︎OTC", "USD/BRL☞︎OTC", "USD/CAD➢", "USD/CHF➢",
+            "USD/COP☞︎OTC", "USD/DZD☞︎OTC", "USD/INR☞︎OTC", "USD/JPY➢", "USD/NGN☞︎OTC",
+            "USD/PKR☞︎OTC", "USD/SGD☞︎OTC", "USD/TRY☞︎OTC", "USD/ZAR☞︎OTC", 
+        ];
+
+        let signals = [];
+        let existingSignals = new Set();
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function generateSignal(asset, time) {
+            const direction = Math.random() < 0.5 ? 'CALL' : 'PUT';
+            return { asset, time, direction };
+        }
+
+        function generateUniqueTimes(count) {
+            const times = [];
+            let nextTime = new Date();
+            for (let i = 0; i < count; i++) {
+                nextTime.setMinutes(nextTime.getMinutes() + 5);
+                times.push(formatTime(nextTime));
+                
+            }
+            return times;
+        }
+
+        function handleGenerateSignals() {
+            const selectedAsset = document.getElementById('asset-select').value;
+            const signalCount = Number(document.getElementById('signal-count').value);
+            const errorMessage = document.getElementById('error-message');
+            
+            if (!selectedAsset) {
+                errorMessage.textContent = 'Please select an asset before generating signals!';
+                return;
+            }
+
+            errorMessage.textContent = '';
+            const uniqueTimes = generateUniqueTimes(signalCount);
+            const newSignals = [];
+
+            uniqueTimes.forEach((time) => {
+                const signalKey = `${selectedAsset} ; ${time}`;
+                if (!existingSignals.has(signalKey)) {
+                    const newSignal = generateSignal(selectedAsset, time);
+                    newSignals.push(newSignal);
+                    existingSignals.add(signalKey);
+                }
+            });
+
+            signals.push(...newSignals);
+            displaySignals(newSignals);
+            showAnimation();
+        }
+
+        function displaySignals(newSignals) {
+            const signalList = document.getElementById('signal-list');
+            newSignals.forEach((signal) => {
+                const li = document.createElement('li');
+                li.textContent = `${signal.asset} ; ${signal.time} ; ${signal.direction}`;
+                signalList.appendChild(li);
+            });
+        }
+
+        function showAnimation() {
+            const animationMessage = document.getElementById('animation-message');
+            animationMessage.style.display = 'block';
+            setTimeout(() => animationMessage.style.display = 'none', 2000);
+        }
+
+        function resetSignals() {
+            signals = [];
+            existingSignals.clear();
+            document.getElementById('signal-list').innerHTML = '';
+        }
+
+        // Populate asset dropdown
+        const assetSelect = document.getElementById('asset-select');
+        availableAssets.forEach(asset => {
+            const option = document.createElement('option');
+            option.value = asset;
+            option.textContent = asset;
+            assetSelect.appendChild(option);
+        });
+
+        // Event listeners
+        document.getElementById('generate-signals').addEventListener('click', handleGenerateSignals);
+        document.getElementById('reset-signals').addEventListener('click', resetSignals);
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
